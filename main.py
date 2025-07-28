@@ -1,5 +1,7 @@
 from random import choice
 from time import sleep
+from colorama import Fore, Back, Style, init
+
 
 choice_list = ['Rock', 'Paper', 'Scissors']
 player_score = 0
@@ -7,7 +9,8 @@ computer_score = 0
 
 def main(welcome = True):
     global player_score, computer_score # Global variable cuz python cant use player_score or computer_score since its outside of the main function
-
+    init (autoreset = True)
+    
     def get_results(player_move, computer_move):
         if player_move == computer_move:
             return "tie"
@@ -31,6 +34,8 @@ def main(welcome = True):
             computer_move = choice(choice_list)
             print(computer_move)
             break 
+        elif player_move == "Lizard":
+            print("🦎 You found the secret Lizard! Too bad it's not supported 😄")
         else:
             print("The move is invalid, please reenter one of the choices")
 
@@ -38,12 +43,12 @@ def main(welcome = True):
     result = get_results(player_move, computer_move) # Calling the get_results function to see who won
     if result == "player_win":
         player_score += 1
-        print(f"You win! {player_move} beats {computer_move}.")
+        print(Back.GREEN + Fore.WHITE + f"You win! {player_move} beats {computer_move}.")
     elif result == "computer_win":
         computer_score += 1
-        print(f"Computer wins! {computer_move} beats {player_move}.")
+        print(Back.RED + Fore.WHITE + f"Computer wins! {computer_move} beats {player_move}.")
     else:  # This case is a tie
-        print(f"It's a tie! Both chose {player_move}.")
+        print(Back.YELLOW + Fore.WHITE + f"It's a tie! Both chose {player_move}.")
     
     print(f"Score -> Player {player_score} : Computer {computer_score}")
                 
